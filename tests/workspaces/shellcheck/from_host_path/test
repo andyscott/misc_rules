@@ -1,6 +1,33 @@
 #!/usr/bin/env bash
 
+set -e
 cd "$(dirname "$0")"
 
-./tools/bazel test //:shellcheck_test 2>&1 | grep "shellcheck: command not found"
-./tools/bazel test --test_env=PATH //:shellcheck_test
+./tools/bazel test //:shellcheck_test 2>&1 | grep "shellcheck: command not found" > /dev/null || {
+    echo "test 1 failed"
+    exit 1
+}
+
+tmp="$(mktemp -d)"
+
+if [[ ! "$tmp" || ! -d "$tmp" ]]; then
+  echo "Could not create temp dir"
+  exit 1
+fi
+
+function cleanup {
+  rm -rf "$tmp"
+}
+trap cleanup EXIT
+
+cat <<EOF > "$tmp"/shellcheck
+#!/usr/bin/env bash
+echo "EASY_TO_FIND_MESSAGE"
+exit 1
+EOF
+chmod +x "$tmp"/shellcheck
+
+PATH="$tmp:$PATH" ./tools/bazel test --test_env=PATH //:shellcheck_test 2>&1 | grep "EASY_TO_FIND_MESSAGE" > /dev/null || {
+    echo "test 2 failed"
+    exit 1
+}
