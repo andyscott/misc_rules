@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
-set -euox pipefail
-
 # --- begin bash runfile prelude --
-
 if [[ -e "${TEST_SRCDIR:-}" ]]; then
     function runfile() {
         echo "$TEST_SRCDIR/$1"
@@ -19,9 +16,9 @@ else
     exit 1
 fi
 export -f runfile
-
 # --- end bash runfile prelude --
 
+set -euo pipefail
 cd "${BUILD_WORKSPACE_DIRECTORY:-$(dirname "$0")/..}"
 
 bazel=./tools/bazel

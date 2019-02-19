@@ -1,19 +1,5 @@
 #!/bin/bash -e
 
-abs_path() {
-    perl -MCwd -le '
-    for (@ARGV) {
-      if ($p = Cwd::abs_path $_) {
-        print $p;
-      } else {
-        warn "abs_path: $_: $!\n";
-        $ret = 1;
-      }
-    }
-    exit $ret' "$@"
-}
-root_workspace=$(cd "$(dirname "$(abs_path "$0")")"/..; pwd)
-
 default_bazel_version='0.22.0'
 
 if [ -z "$OVERRIDE_BAZEL_VERSION" ]; then
@@ -103,8 +89,32 @@ do
     esac
 done
 
+abs_path() {
+    perl -MCwd -le '
+    for (@ARGV) {
+      if ($p = Cwd::abs_path $_) {
+        print $p;
+      } else {
+        warn "abs_path: $_: $!\n";
+        $ret = 1;
+      }
+    }
+    exit $ret' "$@"
+}
+root_workspace=$(cd "$(dirname "$(abs_path "$0")")"/..; pwd)
+workspace=$(cd "$(dirname "$0")"/..; pwd)
+
+if [ "$workspace" != "$root_workspace" ]; then
+    set -- --bazelrc="$root_workspace"/.bazelrc "$@"
+fi
+
 disk_cache="$root_workspace"/.bazel_cache
+disk_cache_rc="$disk_cache"/bazelrc
 mkdir -p "$disk_cache"
+cat > "$disk_cache_rc" <<EOF
+build --disk_cache=$disk_cache
+EOF
+set -- --bazelrc="$disk_cache_rc" "$@"
 
 (>&2 echo :: exec "$bazel" "$@")
 exec "$bazel" "$@"

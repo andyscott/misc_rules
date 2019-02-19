@@ -21,9 +21,5 @@ export -f runfile
 set -euo pipefail
 cd "${BUILD_WORKSPACE_DIRECTORY:-$(dirname "$0")/..}"
 
-# shellcheck source=/dev/null
-. "$(runfile rules_adroit/tasks/lint)"
-# shellcheck source=/dev/null
-. "$(runfile rules_adroit/tasks/build)"
-# shellcheck source=/dev/null
-. "$(runfile rules_adroit/tasks/test)"
+bazel=./tools/bazel
+$bazel build //...
