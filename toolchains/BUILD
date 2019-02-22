@@ -1,4 +1,7 @@
 load("//rules/shellcheck:shellcheck.bzl", "shellcheck_toolchain")
+load("//rules/yamllint:yamllint.bzl", "yamllint_toolchain")
+
+# shellcheck
 
 shellcheck_toolchain(
     name = "_shellcheck_from_nixpkgs",
@@ -40,5 +43,20 @@ toolchain(
     name = "shellcheck_from_host_path",
     toolchain = ":_shellcheck_from_host_path",
     toolchain_type = "@rules_adroit//rules/shellcheck:toolchain_type",
+    visibility = ["//visibility:public"],
+)
+
+# yamllint
+
+yamllint_toolchain(
+    name = "_yamllint_from_nixpkgs",
+    yamllint = "@yamllint//:bin/yamllint",
+    visibility = ["//visibility:public"],
+)
+
+toolchain(
+    name = "yamllint_from_nixpkgs",
+    toolchain = ":_yamllint_from_nixpkgs",
+    toolchain_type = "@rules_adroit//rules/yamllint:toolchain_type",
     visibility = ["//visibility:public"],
 )
