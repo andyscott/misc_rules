@@ -1,0 +1,6 @@
+---
+this:
+  is:
+  # bad comment indentation
+    some:
+      - yaml

@@ -25,7 +25,7 @@ First, register a shellcheck toolchain.
 ```python
 nixpkgs_package(
     name = "shellcheck",
-    repository = "@your_nixpkgs_repo",
+    repository = "@nixpkgs",
 )
 register_toolchains(
     "@rules_adroit//toolchains:shellcheck_from_nixpkgs",
@@ -88,3 +88,36 @@ shell_binary(
 
 This macro gives you the usual targets as well as additional
 `@shellcheck` suffixed targets for running shellcheck.
+
+## Yamllint
+
+First, register a yamllint toolchain.
+
+**Prebuilt via rules_nixpkgs:**
+
+```python
+nixpkgs_package(
+    name = "yamllint",
+    attribute_path = "python36Packages.yamllint",
+    repository = "@nixpkgs",
+)
+register_toolchains(
+    "@rules_adroit//toolchains:yamllint_from_nixpkgs",
+)
+```
+
+---
+
+
+Now you can yamllint your scripts!
+
+``` python
+load("@rules_adroit//rules/yamllint:yamllint.bzl", "yamllint_test")
+
+yamllint_test(
+    name = "my_config@yamllint",
+    srcs = [
+        "my_config.yaml",
+    ],
+)
+```

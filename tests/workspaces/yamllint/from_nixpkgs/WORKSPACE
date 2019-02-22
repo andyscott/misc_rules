@@ -1,4 +1,7 @@
-workspace(name = "rules_adroit")
+local_repository(
+    name = "rules_adroit",
+    path = "../../../../",
+)
 
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
@@ -16,12 +19,7 @@ load(
 
 nixpkgs_local_repository(
     name = "nixpkgs",
-    nix_file = "//3rdparty:nixpkgs.nix",
-)
-
-nixpkgs_package(
-    name = "shellcheck",
-    repository = "@nixpkgs",
+    nix_file = "@rules_adroit//3rdparty:nixpkgs.nix",
 )
 
 nixpkgs_package(
@@ -31,6 +29,5 @@ nixpkgs_package(
 )
 
 register_toolchains(
-    "@rules_adroit//toolchains:shellcheck_from_nixpkgs",
     "@rules_adroit//toolchains:yamllint_from_nixpkgs",
 )
