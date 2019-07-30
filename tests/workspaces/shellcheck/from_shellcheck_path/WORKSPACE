@@ -1,0 +1,8 @@
+local_repository(
+    name = "misc_rules",
+    path = "../../../../",
+)
+
+register_toolchains(
+    "@misc_rules//toolchains:shellcheck_from_shellcheck_path",
+)
