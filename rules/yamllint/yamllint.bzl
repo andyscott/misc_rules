@@ -1,5 +1,5 @@
 def _yamllint_test_implementation(ctx):
-    yamllint_attr = ctx.toolchains["@rules_adroit//rules/yamllint:toolchain_type"].yamllint
+    yamllint_attr = ctx.toolchains["@misc_rules//rules/yamllint:toolchain_type"].yamllint
     yamllint_inputs, _, _ = ctx.resolve_command(tools = [yamllint_attr])
     yamllint = yamllint_inputs[0]
     args = ctx.actions.args()
@@ -38,7 +38,7 @@ yamllint_test = rule(
         "bin": "%{name}-bin",
     },
     test = True,
-    toolchains = ["@rules_adroit//rules/yamllint:toolchain_type"],
+    toolchains = ["@misc_rules//rules/yamllint:toolchain_type"],
     implementation = _yamllint_test_implementation,
 )
 

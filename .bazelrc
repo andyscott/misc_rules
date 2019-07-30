@@ -1,6 +1,5 @@
 common --announce_rc
 common --color=yes
-common --all_incompatible_changes
 
 build --experimental_strict_action_env
 build --worker_max_instances=4
@@ -9,9 +8,7 @@ build --verbose_failures
 
 test  --test_output=all
 
-common:v0.22 --config=noop
-common:v0.23 --config=noop
-common:v0.24 --config=noop
+common:v0.28 --config=noop
 
 # pick something trivial as a "noop"
 common:noop --logging=3

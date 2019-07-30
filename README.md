@@ -1,4 +1,4 @@
-# rules_adroit
+# misc_rules
 
 Rules for miscellaneous system tools, linters, etc.
 
@@ -8,9 +8,9 @@ You'll need to first load the rules in your WORKSPACE file.
 
 ``` python
 git_repository(
-    name = "rules_adroit",
+    name = "misc_rules",
     commit = "<<pick-a-commit-sha>>",
-    remote = "git://github.com/andyscott/rules_adroit",
+    remote = "git://github.com/andyscott/misc_rules",
 )
 ```
 
@@ -28,7 +28,7 @@ nixpkgs_package(
     repository = "@nixpkgs",
 )
 register_toolchains(
-    "@rules_adroit//toolchains:shellcheck_from_nixpkgs",
+    "@misc_rules//toolchains:shellcheck_from_nixpkgs",
 )
 ```
 
@@ -36,7 +36,7 @@ register_toolchains(
 
 ``` python
 register_toolchains(
-    "@rules_adroit//toolchains:shellcheck_from_host_path",
+    "@misc_rules//toolchains:shellcheck_from_host_path",
 )
 ```
 
@@ -49,7 +49,7 @@ register_toolchains(
 Now you can shellcheck your scripts!
 
 ``` python
-load("@rules_adroit//rules/shellcheck:shellcheck.bzl", "shellcheck_test")
+load("@misc_rules//rules/shellcheck:shellcheck.bzl", "shellcheck_test")
 
 shellcheck_test(
     name = "myscript@shellcheck",
@@ -102,7 +102,7 @@ nixpkgs_package(
     repository = "@nixpkgs",
 )
 register_toolchains(
-    "@rules_adroit//toolchains:yamllint_from_nixpkgs",
+    "@misc_rules//toolchains:yamllint_from_nixpkgs",
 )
 ```
 
@@ -112,7 +112,7 @@ register_toolchains(
 Now you can yamllint your scripts!
 
 ``` python
-load("@rules_adroit//rules/yamllint:yamllint.bzl", "yamllint_test")
+load("@misc_rules//rules/yamllint:yamllint.bzl", "yamllint_test")
 
 yamllint_test(
     name = "my_config@yamllint",

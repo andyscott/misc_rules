@@ -1,5 +1,5 @@
 def _shellcheck_test_implementation(ctx):
-    shellcheck_attr = ctx.toolchains["@rules_adroit//rules/shellcheck:toolchain_type"].shellcheck
+    shellcheck_attr = ctx.toolchains["@misc_rules//rules/shellcheck:toolchain_type"].shellcheck
     shellcheck_inputs, _, _ = ctx.resolve_command(tools = [shellcheck_attr])
     shellcheck = shellcheck_inputs[0]
     args = ctx.actions.args()
@@ -38,7 +38,7 @@ shellcheck_test = rule(
         "bin": "%{name}-bin",
     },
     test = True,
-    toolchains = ["@rules_adroit//rules/shellcheck:toolchain_type"],
+    toolchains = ["@misc_rules//rules/shellcheck:toolchain_type"],
     implementation = _shellcheck_test_implementation,
 )
 
