@@ -1,4 +1,4 @@
-workspace(name = "rules_adroit")
+workspace(name = "misc_rules")
 
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
@@ -31,6 +31,6 @@ nixpkgs_package(
 )
 
 register_toolchains(
-    "@rules_adroit//toolchains:shellcheck_from_nixpkgs",
-    "@rules_adroit//toolchains:yamllint_from_nixpkgs",
+    "@misc_rules//toolchains:shellcheck_from_nixpkgs",
+    "@misc_rules//toolchains:yamllint_from_nixpkgs",
 )

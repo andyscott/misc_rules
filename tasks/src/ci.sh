@@ -22,8 +22,8 @@ set -euo pipefail
 cd "${BUILD_WORKSPACE_DIRECTORY:-$(dirname "$0")/..}"
 
 # shellcheck source=/dev/null
-. "$(runfile rules_adroit/tasks/lint)"
+. "$(runfile misc_rules/tasks/lint)"
 # shellcheck source=/dev/null
-. "$(runfile rules_adroit/tasks/build)"
+. "$(runfile misc_rules/tasks/build)"
 # shellcheck source=/dev/null
-. "$(runfile rules_adroit/tasks/test)"
+. "$(runfile misc_rules/tasks/test)"

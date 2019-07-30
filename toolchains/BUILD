@@ -12,7 +12,7 @@ shellcheck_toolchain(
 toolchain(
     name = "shellcheck_from_nixpkgs",
     toolchain = ":_shellcheck_from_nixpkgs",
-    toolchain_type = "@rules_adroit//rules/shellcheck:toolchain_type",
+    toolchain_type = "@misc_rules//rules/shellcheck:toolchain_type",
     visibility = ["//visibility:public"],
 )
 
@@ -35,14 +35,14 @@ sh_binary(
 
 shellcheck_toolchain(
     name = "_shellcheck_from_host_path",
-    shellcheck = "@rules_adroit//toolchains:_host_path_shellcheck",
+    shellcheck = "@misc_rules//toolchains:_host_path_shellcheck",
     visibility = ["//visibility:public"],
 )
 
 toolchain(
     name = "shellcheck_from_host_path",
     toolchain = ":_shellcheck_from_host_path",
-    toolchain_type = "@rules_adroit//rules/shellcheck:toolchain_type",
+    toolchain_type = "@misc_rules//rules/shellcheck:toolchain_type",
     visibility = ["//visibility:public"],
 )
 
@@ -57,6 +57,6 @@ yamllint_toolchain(
 toolchain(
     name = "yamllint_from_nixpkgs",
     toolchain = ":_yamllint_from_nixpkgs",
-    toolchain_type = "@rules_adroit//rules/yamllint:toolchain_type",
+    toolchain_type = "@misc_rules//rules/yamllint:toolchain_type",
     visibility = ["//visibility:public"],
 )

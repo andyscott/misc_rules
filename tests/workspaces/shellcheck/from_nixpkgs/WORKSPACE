@@ -1,5 +1,5 @@
 local_repository(
-    name = "rules_adroit",
+    name = "misc_rules",
     path = "../../../../",
 )
 
@@ -19,7 +19,7 @@ load(
 
 nixpkgs_local_repository(
     name = "nixpkgs",
-    nix_file = "@rules_adroit//3rdparty:nixpkgs.nix",
+    nix_file = "@misc_rules//3rdparty:nixpkgs.nix",
 )
 
 nixpkgs_package(
@@ -28,5 +28,5 @@ nixpkgs_package(
 )
 
 register_toolchains(
-    "@rules_adroit//toolchains:shellcheck_from_nixpkgs",
+    "@misc_rules//toolchains:shellcheck_from_nixpkgs",
 )

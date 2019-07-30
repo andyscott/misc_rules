@@ -24,7 +24,7 @@ cd "${BUILD_WORKSPACE_DIRECTORY:-$(dirname "$0")/..}" || exit 1
 code=0
 
 # shellcheck source=/dev/null
-. "$(runfile rules_adroit/tasks/sync-workspace-tests)"
+. "$(runfile misc_rules/tasks/sync-workspace-tests)"
 
 printf "\\nrunning workspace tests in tests/workspaces/\\n\\n"
 
