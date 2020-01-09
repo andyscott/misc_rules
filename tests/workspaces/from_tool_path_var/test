@@ -3,11 +3,6 @@
 set -e
 cd "$(dirname "$0")"
 
-./tools/bazel test @shared//:shellcheck_test 2>&1 | grep "SHELLCHECK_PATH must be set" > /dev/null || {
-    echo "test 1 failed"
-    #exit 1
-}
-
 tmp="$(mktemp -d)"
 
 if [[ ! "$tmp" || ! -d "$tmp" ]]; then
@@ -20,14 +15,26 @@ function cleanup {
 }
 trap cleanup EXIT
 
-cat <<EOF > "$tmp"/shellcheck
+cat <<EOF > "$tmp"/batman
 #!/usr/bin/env bash
 echo "EASY_TO_FIND_MESSAGE"
 exit 1
 EOF
-chmod +x "$tmp"/shellcheck
+chmod +x "$tmp"/batman
 
-./tools/bazel test --test_env SHELLCHECK_PATH="$tmp"/shellcheck @shared//:shellcheck_test 2>&1 | grep "EASY_TO_FIND_MESSAGE" > /dev/null || {
-    echo "test 2 failed"
-    exit 1
-}
+for thing in shellcheck black; do
+    THING=$(echo "$thing" | tr '[:lower:]' '[:upper:]')
+    echo "> $thing"
+
+    echo "- test 1"
+    ./tools/bazel test @shared//:"$thing"_test 2>&1 | grep "${THING}_PATH must be set" > /dev/null || {
+	echo "$thing test 1 failed"
+	exit 1
+    }
+
+    echo "- test 2"
+    ./tools/bazel test --test_env "$THING"_PATH="$tmp"/batman @shared//:"$thing"_test 2>&1 | grep "EASY_TO_FIND_MESSAGE" > /dev/null || {
+	echo "$thing test 2 failed"
+	exit 1
+    }
+done

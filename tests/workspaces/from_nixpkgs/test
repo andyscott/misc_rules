@@ -5,4 +5,6 @@ cd "$(dirname "$0")"
 
 ./tools/bazel test @shared//:shellcheck_test
 
-./tools/bazel test @shared//:yamllint_test | grep "comments-indentation"
+./tools/bazel test @shared//:yamllint_test | grep 'comments-indentation'
+
+./tools/bazel test @shared//:black_test | grep '1 file would be reformatted'

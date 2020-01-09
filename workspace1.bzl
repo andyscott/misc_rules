@@ -1,5 +1,5 @@
 load("@io_tweag_rules_nixpkgs//nixpkgs:repositories.bzl", "rules_nixpkgs_dependencies")
-load("@io_tweag_rules_nixpkgs//nixpkgs:nixpkgs.bzl", "nixpkgs_git_repository")
+load("@io_tweag_rules_nixpkgs//nixpkgs:nixpkgs.bzl", "nixpkgs_git_repository", "nixpkgs_package")
 
 def workspace1():
     rules_nixpkgs_dependencies()
@@ -7,4 +7,27 @@ def workspace1():
     nixpkgs_git_repository(
 	name = "nixpkgs",
     	revision = "19.09",
+    )
+
+    nixpkgs_package(
+        name = "shellcheck",
+        repository = "@nixpkgs",
+    )
+
+    nixpkgs_package(
+        name = "yamllint",
+        attribute_path = "python36Packages.yamllint",
+        repository = "@nixpkgs",
+    )
+
+    nixpkgs_package(
+        name = "black",
+        attribute_path = "python37Packages.black",
+        repository = "@nixpkgs",
+    )
+
+    native.register_toolchains(
+        "@misc_rules//toolchains:shellcheck_from_nixpkgs",
+        "@misc_rules//toolchains:yamllint_from_nixpkgs",
+        "@misc_rules//toolchains:black_from_nixpkgs",
     )
