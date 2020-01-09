@@ -27,7 +27,7 @@ def workspace1():
     )
 
     native.register_toolchains(
-        "@misc_rules//toolchains:shellcheck_from_nixpkgs",
-        "@misc_rules//toolchains:yamllint_from_nixpkgs",
-        "@misc_rules//toolchains:black_from_nixpkgs",
+        "@misc_rules//toolchains/shellcheck:shellcheck_from_nixpkgs",
+        "@misc_rules//toolchains/yamllint:yamllint_from_nixpkgs",
+        "@misc_rules//toolchains/black:black_from_nixpkgs",
     )
