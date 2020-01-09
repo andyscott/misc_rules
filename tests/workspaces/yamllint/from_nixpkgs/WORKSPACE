@@ -3,24 +3,15 @@ local_repository(
     path = "../../../../",
 )
 
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+load("@misc_rules//:workspace0.bzl", "workspace0")
 
-git_repository(
-    name = "io_tweag_rules_nixpkgs",
-    commit = "40b5a9f23abca57f364c93245c7451206ef1a855",
-    remote = "git://github.com/tweag/rules_nixpkgs",
-)
+workspace0()
 
-load(
-    "@io_tweag_rules_nixpkgs//nixpkgs:nixpkgs.bzl",
-    "nixpkgs_local_repository",
-    "nixpkgs_package",
-)
+load("@misc_rules//:workspace1.bzl", "workspace1")
 
-nixpkgs_local_repository(
-    name = "nixpkgs",
-    nix_file = "@misc_rules//3rdparty:nixpkgs.nix",
-)
+workspace1()
+
+load("@io_tweag_rules_nixpkgs//nixpkgs:nixpkgs.bzl", "nixpkgs_package")
 
 nixpkgs_package(
     name = "yamllint",

@@ -1,23 +1,14 @@
 workspace(name = "misc_rules")
 
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load(":workspace0.bzl", "workspace0")
 
-http_archive(
-    name = "io_tweag_rules_nixpkgs",
-    strip_prefix = "rules_nixpkgs-adfe991ad7fd41fcdbeaeabf33ea061d9b435c97",
-    urls = ["https://github.com/tweag/rules_nixpkgs/archive/adfe991ad7fd41fcdbeaeabf33ea061d9b435c97.tar.gz"],
-)
+workspace0()
 
-load("@io_tweag_rules_nixpkgs//nixpkgs:repositories.bzl", "rules_nixpkgs_dependencies")
+load(":workspace1.bzl", "workspace1")
 
-rules_nixpkgs_dependencies()
+workspace1()
 
-load("@io_tweag_rules_nixpkgs//nixpkgs:nixpkgs.bzl", "nixpkgs_local_repository", "nixpkgs_package")
-
-nixpkgs_local_repository(
-    name = "nixpkgs",
-    nix_file = "//3rdparty:nixpkgs.nix",
-)
+load("@io_tweag_rules_nixpkgs//nixpkgs:nixpkgs.bzl", "nixpkgs_package")
 
 nixpkgs_package(
     name = "shellcheck",
