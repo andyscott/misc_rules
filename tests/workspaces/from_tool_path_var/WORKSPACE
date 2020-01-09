@@ -1,6 +1,11 @@
 local_repository(
+    name = "shared",
+    path = "../shared",
+)
+
+local_repository(
     name = "misc_rules",
-    path = "../../../../",
+    path = "../../../",
 )
 
 register_toolchains(

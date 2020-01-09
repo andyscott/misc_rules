@@ -1,6 +1,11 @@
 local_repository(
+    name = "shared",
+    path = "../shared",
+)
+
+local_repository(
     name = "misc_rules",
-    path = "../../../../",
+    path = "../../../",
 )
 
 load("@misc_rules//:workspace0.bzl", "workspace0")
@@ -18,6 +23,13 @@ nixpkgs_package(
     repository = "@nixpkgs",
 )
 
+nixpkgs_package(
+    name = "yamllint",
+    attribute_path = "python36Packages.yamllint",
+    repository = "@nixpkgs",
+)
+
 register_toolchains(
     "@misc_rules//toolchains:shellcheck_from_nixpkgs",
+    "@misc_rules//toolchains:yamllint_from_nixpkgs",
 )

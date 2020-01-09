@@ -3,9 +3,9 @@
 set -e
 cd "$(dirname "$0")"
 
-./tools/bazel test //:shellcheck_test 2>&1 | grep "SHELLCHECK_PATH must be set" > /dev/null || {
+./tools/bazel test @shared//:shellcheck_test 2>&1 | grep "shellcheck: command not found" > /dev/null || {
     echo "test 1 failed"
-    #exit 1
+    exit 1
 }
 
 tmp="$(mktemp -d)"
@@ -27,7 +27,7 @@ exit 1
 EOF
 chmod +x "$tmp"/shellcheck
 
-./tools/bazel test --test_env SHELLCHECK_PATH="$tmp"/shellcheck //:shellcheck_test 2>&1 | grep "EASY_TO_FIND_MESSAGE" > /dev/null || {
+PATH="$tmp:$PATH" ./tools/bazel test --test_env=PATH @shared//:shellcheck_test 2>&1 | grep "EASY_TO_FIND_MESSAGE" > /dev/null || {
     echo "test 2 failed"
     exit 1
 }
