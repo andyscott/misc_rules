@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-default_bazel_version='0.28.1'
+default_bazel_version='2.0.0'
 
 if [ -z "$OVERRIDE_BAZEL_VERSION" ]; then
     bazel_version="$default_bazel_version"
@@ -13,9 +13,9 @@ case "$bazel_version" in
         bazel_version=$("$BAZEL_REAL" version | awk '/Build label/ {print $3}' | cut -d '-' -f 1)
         bazel="$BAZEL_REAL"
         ;;
-    '0.28.1')
-        darwin_sha='5d50ae13ba01a224ddf54cfd818289bee5b38e551cca22bffc79b89f377d2095'
-        linux_sha='a2a7e4cb38d7bc774a5bbfab4d45293f5f2158eb6caf0128792cc1148732a4e6'
+    '2.0.0')
+        darwin_sha='c675fa27d99a3114d681db10eb03ded547c40f702b2048c99b8f4ea8e89b9356'
+        linux_sha='2fbdc9c0e3d376697caf0ee3673b7c9475214068c55a01b9744891e131f90b87'
         ;;
     *)
         echo "The requested Bazel version '$bazel_version' is not supported"
@@ -69,8 +69,8 @@ fi
 
 extra_command_args=()
 
-IFS=. read -r major minor _ < <(echo "$bazel_version")
-extra_command_args+=("--config=v$major.$minor")
+#IFS=. read -r major minor _ < <(echo "$bazel_version")
+#extra_command_args+=("--config=v$major.$minor")
 
 for (( i=1; i<=$#; i++ ))
 do
