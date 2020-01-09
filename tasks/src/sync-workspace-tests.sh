@@ -31,7 +31,7 @@ while read -r f; do
 
     echo "- set local repo path to $rel"
     escaped_rel=$(echo "$rel" | sed 's/\//\\\//g')
-    sed -i.bak "s/^\\( *path *= *\"\\).*\\(\",\\{0,1\\}\\)$/\\1${escaped_rel}\\2/" WORKSPACE
+    sed -i.bak "s/^\\( *path *= *\"\\)[\.\/]*\\(\",\\{0,1\\}\\)$/\\1${escaped_rel}\\2/" WORKSPACE
     rm WORKSPACE.bak
 
     rm -f .bazelrc
