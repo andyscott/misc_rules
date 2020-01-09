@@ -9,5 +9,5 @@ local_repository(
 )
 
 register_toolchains(
-    "@misc_rules//toolchains:shellcheck_from_host_path",
+    "@misc_rules//toolchains/shellcheck:shellcheck_from_host_path",
 )

@@ -9,6 +9,6 @@ local_repository(
 )
 
 register_toolchains(
-    "@misc_rules//toolchains:shellcheck_from_shellcheck_path",
-    "@misc_rules//toolchains:black_from_black_path",
+    "@misc_rules//toolchains/shellcheck:shellcheck_from_shellcheck_path",
+    "@misc_rules//toolchains/black:black_from_black_path",
 )
