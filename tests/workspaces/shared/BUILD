@@ -21,6 +21,22 @@ yamllint_test(
 black_test(
     name = "black_test",
     srcs = [
-        "input.py",
+        "input_0.py",
     ],
+)
+
+black_test(
+    name = "black_test_config_a",
+    srcs = [
+        "input_1.py",
+    ],
+    config = "pyproject_10.toml",
+)
+
+black_test(
+    name = "black_test_config_b",
+    srcs = [
+        "input_1.py",
+    ],
+    config = "pyproject_100.toml",
 )
