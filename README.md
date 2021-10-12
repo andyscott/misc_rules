@@ -28,7 +28,7 @@ nixpkgs_package(
     repository = "@nixpkgs",
 )
 register_toolchains(
-    "@misc_rules//toolchains:shellcheck_from_nixpkgs",
+    "@misc_rules//toolchains/shellcheck:shellcheck_from_nixpkgs",
 )
 ```
 
@@ -36,7 +36,7 @@ register_toolchains(
 
 ``` python
 register_toolchains(
-    "@misc_rules//toolchains:shellcheck_from_host_path",
+    "@misc_rules//toolchains/shellcheck:shellcheck_from_host_path",
 )
 ```
 
@@ -102,7 +102,7 @@ nixpkgs_package(
     repository = "@nixpkgs",
 )
 register_toolchains(
-    "@misc_rules//toolchains:yamllint_from_nixpkgs",
+    "@misc_rules//toolchains/yamllint:yamllint_from_nixpkgs",
 )
 ```
 
