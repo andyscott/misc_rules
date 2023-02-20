@@ -7,6 +7,8 @@ Rules for miscellaneous system tools, linters, etc.
 You'll need to first load the rules in your WORKSPACE file.
 
 ``` python
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+
 git_repository(
     name = "misc_rules",
     commit = "<<pick-a-commit-sha>>",
